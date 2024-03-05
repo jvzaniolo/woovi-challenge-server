@@ -12,6 +12,7 @@ The server is built using:
 - Apollo Server
 - MongoDB
 - TypeScript
+- Docker
 
 ## Getting Started
 
