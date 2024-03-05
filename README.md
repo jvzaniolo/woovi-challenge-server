@@ -24,10 +24,18 @@ To run the server, you need to have Node.js and MongoDB installed on your machin
 4. Run `npm run dev` to start the server in development mode
 5. Open your browser and go to `http://localhost:4000` to access the GraphQL Playground
 
-## Considerations
+### Considerations
 
 I was not able to implement this server using the codegen to generate the types for the resolvers.
 
 The code generation works as expected, but since the type for `ID` is different in MongoDB, the generated types are not compatible with the types used in the resolvers.
 
 To run the codegen, you can use `npm run codegen` and it will generate the types in the `src/@types/types.ts` file.
+
+## Requirements
+
+- The user can create a new task
+- The user can list all existing tasks
+- The user can list an existing task by id
+- The user can update an existing task by id
+- The user can delete an existing task by id
