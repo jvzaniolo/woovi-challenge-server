@@ -1,4 +1,4 @@
-# Woovi Challenge Server
+# To-do app GraphQL Server
 
 This is a simple server that provides a GraphQL API to manage tasks for a To-do app.
 
