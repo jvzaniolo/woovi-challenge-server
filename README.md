@@ -30,7 +30,7 @@ I was not able to implement this server using the codegen to generate the types 
 
 The code generation works as expected, but since the type for `ID` is different in MongoDB, the generated types are not compatible with the types used in the resolvers.
 
-To run the codegen, you can use `npm run codegen` and it will generate the types in the `src/@types/types.ts` file.
+To run the codegen, you can use `npm run generate` and it will generate the types in the `src/@types/types.ts` file.
 
 ## Requirements
 

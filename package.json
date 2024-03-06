@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "codegen": "graphql-codegen"
+    "generate": "graphql-codegen"
   },
   "keywords": [],
   "author": "",
