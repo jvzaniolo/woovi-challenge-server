@@ -4,7 +4,7 @@ type Query {
   "Get all tasks"
   tasks: [Task!]!
   "Get a specific task by ID"
-  task(id: ObjectId!): Task
+  task(_id: ObjectId!): Task
 }
 
 type Mutation {
@@ -13,7 +13,7 @@ type Mutation {
   "Update an existing task"
   updateTask(input: UpdateTaskInput!): MutateTaskPayload!
   "Delete an existing task"
-  deleteTask(id: ID!): MutateTaskPayload!
+  deleteTask(_id: ObjectId!): MutateTaskPayload!
 }
 
 type MutateTaskPayload {
@@ -27,7 +27,7 @@ type MutateTaskPayload {
 
 input UpdateTaskInput {
   "The ID of the task to update"
-  id: ID!
+  _id: ObjectId!
   "The task's new title"
   title: String
   "The task's new description"

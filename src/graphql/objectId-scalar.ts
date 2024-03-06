@@ -5,21 +5,21 @@ export const ObjectIdScalar = new GraphQLScalarType({
   name: 'ObjectId',
   description: 'Mongo object id scalar type',
   serialize(value) {
-    if (!(value instanceof ObjectId)) {
-      throw new Error('ObjectIdScalar can only serialize ObjectId values')
+    if (value instanceof ObjectId) {
+      return value.toString()
     }
-    return value.toString()
+    throw new Error('ObjectId Scalar serializer expected an `ObjectId` object')
   },
   parseValue(value) {
-    if (typeof value !== 'string') {
-      throw new Error('ObjectIdScalar can only parse string values')
+    if (typeof value === 'string') {
+      return new ObjectId(value)
     }
-    return new ObjectId(value)
+    throw new Error('ObjectId Scalar parser expected a `string`')
   },
   parseLiteral(ast) {
-    if (ast.kind !== Kind.STRING) {
-      throw new Error('ObjectIdScalar can only parse string values')
+    if (ast.kind === Kind.STRING) {
+      return new ObjectId(ast.value)
     }
-    return new ObjectId(ast.value)
+    return null
   },
 })

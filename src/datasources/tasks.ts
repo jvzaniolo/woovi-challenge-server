@@ -36,8 +36,7 @@ export class Tasks {
   }
 
   async updateTask({ input }: MutationUpdateTaskArgs) {
-    let _id = new ObjectId(input.id) as Task['_id']
-    let task = await this.collection.findOne({ _id })
+    let task = await this.collection.findOne({ _id: input._id })
 
     if (!task)
       return {
@@ -53,7 +52,7 @@ export class Tasks {
     }
 
     await this.collection.updateOne(
-      { _id },
+      { _id: input._id },
       {
         $set: updatedTaskBody,
       }
@@ -62,12 +61,11 @@ export class Tasks {
     return {
       code: 200,
       success: true,
-      task: { _id: input.id, ...updatedTaskBody },
+      task: { _id: input._id, ...updatedTaskBody },
     }
   }
 
-  async deleteTask(id: string) {
-    let _id = new ObjectId(id) as Task['_id']
+  async deleteTask(_id: Task['_id']) {
     await this.collection.deleteOne({ _id })
     return {
       code: 200,

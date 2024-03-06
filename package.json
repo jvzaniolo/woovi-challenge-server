@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "concurrently npm:dev:* -c green,blue",
     "dev:server": "tsx watch src/server.ts",
-    "dev:generate": "graphql-codegen"
+    "dev:generate": "graphql-codegen --watch"
   },
   "keywords": [],
   "author": "",
