@@ -1,8 +1,10 @@
+scalar ObjectId
+
 type Query {
   "Get all tasks"
   tasks: [Task!]!
   "Get a specific task by ID"
-  task(id: ID!): Task!
+  task(id: ObjectId!): Task
 }
 
 type Mutation {
@@ -37,7 +39,7 @@ input UpdateTaskInput {
 "A collection of tasks that need to be completed"
 type Task {
   "The ID for the task"
-  _id: ID!
+  _id: ObjectId!
   "The task's title"
   title: String!
   "The task's description"

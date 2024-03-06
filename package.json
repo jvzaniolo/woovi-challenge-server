@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "generate": "graphql-codegen"
+    "dev": "concurrently npm:dev:* -c green,blue",
+    "dev:server": "tsx watch src/server.ts",
+    "dev:generate": "graphql-codegen"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "@types/koa": "^2.15.0",
     "@types/koa__cors": "^5.0.0",
     "@types/koa-bodyparser": "^4.3.12",
+    "concurrently": "^8.2.2",
     "tsup": "^8.0.2",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3"

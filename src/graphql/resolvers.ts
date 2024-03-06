@@ -1,4 +1,9 @@
-export let resolvers = {
+import type { Resolvers } from '../@types/types'
+import { ObjectIdScalar } from './objectId-scalar'
+
+export let resolvers: Resolvers = {
+  ObjectId: ObjectIdScalar,
+
   Query: {
     tasks: async (parent, args, ctx) => {
       return ctx.dataSources.tasks.getTasks()
@@ -7,6 +12,7 @@ export let resolvers = {
       return ctx.dataSources.tasks.getTask(args.id)
     },
   },
+
   Mutation: {
     createTask: async (parent, args, ctx) => {
       return ctx.dataSources.tasks.createTask(args)

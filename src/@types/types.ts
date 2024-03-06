@@ -1,5 +1,5 @@
-import { GraphQLResolveInfo } from 'graphql';
-import { DataSourceContext } from './context';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { DataSourceContext } from '../graphql/context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  ObjectId: { input: any; output: any; }
 };
 
 export type MutateTaskPayload = {
@@ -56,21 +57,21 @@ export type MutationUpdateTaskArgs = {
 export type Query = {
   __typename?: 'Query';
   /** Get a specific task by ID */
-  task: Task;
+  task?: Maybe<Task>;
   /** Get all tasks */
   tasks: Array<Task>;
 };
 
 
 export type QueryTaskArgs = {
-  id: Scalars['ID']['input'];
+  id: Scalars['ObjectId']['input'];
 };
 
 /** A collection of tasks that need to be completed */
 export type Task = {
   __typename?: 'Task';
   /** The ID for the task */
-  _id: Scalars['ID']['output'];
+  _id: Scalars['ObjectId']['output'];
   /** The task's completion status */
   completed: Scalars['Boolean']['output'];
   /** The task's description */
@@ -166,6 +167,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   MutateTaskPayload: ResolverTypeWrapper<MutateTaskPayload>;
   Mutation: ResolverTypeWrapper<{}>;
+  ObjectId: ResolverTypeWrapper<Scalars['ObjectId']['output']>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Task: ResolverTypeWrapper<Task>;
@@ -179,6 +181,7 @@ export type ResolversParentTypes = {
   Int: Scalars['Int']['output'];
   MutateTaskPayload: MutateTaskPayload;
   Mutation: {};
+  ObjectId: Scalars['ObjectId']['output'];
   Query: {};
   String: Scalars['String']['output'];
   Task: Task;
@@ -198,13 +201,17 @@ export type MutationResolvers<ContextType = DataSourceContext, ParentType extend
   updateTask?: Resolver<ResolversTypes['MutateTaskPayload'], ParentType, ContextType, RequireFields<MutationUpdateTaskArgs, 'input'>>;
 };
 
+export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['ObjectId'], any> {
+  name: 'ObjectId';
+}
+
 export type QueryResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  task?: Resolver<ResolversTypes['Task'], ParentType, ContextType, RequireFields<QueryTaskArgs, 'id'>>;
+  task?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType, RequireFields<QueryTaskArgs, 'id'>>;
   tasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>;
 };
 
 export type TaskResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = {
-  _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  _id?: Resolver<ResolversTypes['ObjectId'], ParentType, ContextType>;
   completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -214,6 +221,7 @@ export type TaskResolvers<ContextType = DataSourceContext, ParentType extends Re
 export type Resolvers<ContextType = DataSourceContext> = {
   MutateTaskPayload?: MutateTaskPayloadResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  ObjectId?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
   Task?: TaskResolvers<ContextType>;
 };
