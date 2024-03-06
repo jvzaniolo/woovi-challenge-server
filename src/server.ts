@@ -10,19 +10,21 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import { MongoClient } from 'mongodb'
 import { Tasks } from './datasources/tasks'
 import { resolvers } from './graphql/resolvers'
+import type { DataSourceContext } from './graphql/context'
 
 let client = new MongoClient('mongodb://root:example@localhost:27017')
 
 client.connect()
 
-let typeDefs = gql(
-  readFileSync(new URL('./graphql/schema.graphql', import.meta.url), 'utf8')
+let typeDefs = readFileSync(
+  new URL('./graphql/schema.graphql', import.meta.url),
+  { encoding: 'utf-8' }
 )
 
 let app = new Koa()
 let httpServer = http.createServer(app.callback())
 
-let server = new ApolloServer({
+let server = new ApolloServer<DataSourceContext>({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
