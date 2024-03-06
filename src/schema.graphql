@@ -1,0 +1,32 @@
+type Query {
+  "Get all tasks"
+  tasks: [Task]
+  "Get a specific task by ID"
+  task(id: ID!): Task
+}
+
+type Mutation {
+  "Create a new task"
+  createTask(title: String!, description: String): Task
+  "Update an existing task"
+  updateTask(
+    id: ID!
+    title: String
+    description: String
+    completed: Boolean
+  ): Task
+  "Delete an existing task"
+  deleteTask(id: ID!): Boolean!
+}
+
+"A collection of tasks that need to be completed"
+type Task {
+  "The ID for the task"
+  id: ID!
+  "The task's title"
+  title: String!
+  "The task's description"
+  description: String
+  "The task's completion status"
+  completed: Boolean!
+}

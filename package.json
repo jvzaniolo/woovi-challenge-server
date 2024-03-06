@@ -5,9 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently npm:dev:* -c green,blue",
-    "dev:server": "tsx watch src/server.ts",
-    "dev:generate": "graphql-codegen --watch"
+    "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -24,14 +22,10 @@
     "mongodb": "^6.4.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-codegen/typescript": "^4.0.6",
-    "@graphql-codegen/typescript-resolvers": "^4.0.6",
-    "@parcel/watcher": "^2.4.1",
     "@types/koa": "^2.15.0",
     "@types/koa__cors": "^5.0.0",
     "@types/koa-bodyparser": "^4.3.12",
-    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
     "tsup": "^8.0.2",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3"
